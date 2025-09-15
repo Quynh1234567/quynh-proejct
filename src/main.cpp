@@ -18,7 +18,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef Arduino_h
+
 #define Arduino_h
 
 #include <stdbool.h>
@@ -184,7 +184,7 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
 uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder);  // codespell:ignore shiftin
 void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 
-#ifdef __cplusplus
+
 }
 
 #include <algorithm>
@@ -252,30 +252,3 @@ uint64_t getArduinoSetupWaitTime_ms(void);
     return (time_ms);                               \
   }
 
-// allows user to bypass esp_spiram_test()
-bool esp_psram_extram_test(void);
-#define BYPASS_SPIRAM_TEST(bypass)    \
-  bool testSPIRAM(void) {             \
-    if (bypass)                       \
-      return true;                    \
-    else                              \
-      return esp_psram_extram_test(); \
-  }
-
-unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
-
-extern "C" bool getLocalTime(struct tm *info, uint32_t ms = 5000);
-extern "C" void configTime(long gmtOffset_sec, int daylightOffset_sec, const char *server1, const char *server2 = nullptr, const char *server3 = nullptr);
-extern "C" void configTzTime(const char *tz, const char *server1, const char *server2 = nullptr, const char *server3 = nullptr);
-
-void setToneChannel(uint8_t channel = 0);
-void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
-void noTone(uint8_t _pin);
-
-#endif /* __cplusplus */
-
-// must be applied last as it overrides some of the above
-#include "io_pin_remap.h"
-
-#endif /* _ESP32_CORE_ARDUINO_H_ */
