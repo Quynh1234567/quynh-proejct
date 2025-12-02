@@ -1,10 +1,9 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
-// Hàm callback khi nhận dữ liệu
 void onReceive(const uint8_t *mac, const uint8_t *data, int len) {
   Serial.print("Nhận từ MAC: ");
-  // In địa chỉ MAC của ESP gửi
+
   for (int i = 0; i < 6; i++) {
     Serial.printf("%02X", mac[i]);
     if (i < 5) Serial.print(":");
